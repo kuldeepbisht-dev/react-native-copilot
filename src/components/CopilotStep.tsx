@@ -9,6 +9,7 @@ interface Props {
   text: string;
   children: React.ReactElement<any>;
   active?: boolean;
+  beforeMaskingHandler?: () => void;
 }
 
 export const CopilotStep = ({
@@ -17,6 +18,7 @@ export const CopilotStep = ({
   text,
   children,
   active = true,
+  beforeMaskingHandler
 }: Props) => {
   const registeredName = useRef<string | null>(null);
   const { registerStep, unregisterStep } = useCopilot();
@@ -61,6 +63,7 @@ export const CopilotStep = ({
         measure,
         wrapperRef,
         visible: true,
+        beforeMaskingHandler
       });
       registeredName.current = name;
     }
