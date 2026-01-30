@@ -117,13 +117,17 @@ export const CopilotProvider = ({
         }
       }
 
+      if (step?.beforeMaskingHandler) {
+        step.beforeMaskingHandler()
+      }
+
       setTimeout(
         () => {
           if (move && step) {
             void moveModalToStep(step);
           }
         },
-        scrollView != null ? 100 : 0
+        scrollView != null ? 100 : step?.beforeMaskingHandler ? 50 : 0
       );
     },
     [copilotEvents, moveModalToStep, scrollView, setCurrentStepState]

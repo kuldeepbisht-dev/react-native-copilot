@@ -14,6 +14,7 @@ export interface Step {
   wrapperRef: React.RefObject<NativeMethods>;
   measure: () => Promise<LayoutRectangle>;
   text: string;
+  beforeMaskingHandler?: () => void
 }
 
 export interface CopilotContext {
