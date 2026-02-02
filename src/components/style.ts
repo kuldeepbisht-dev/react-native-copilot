@@ -20,17 +20,47 @@ export const styles = StyleSheet.create({
     position: "absolute",
     borderWidth: ARROW_SIZE,
   },
+  dot: {
+    width: 12,
+    height: 12,
+    borderRadius: 6,
+    backgroundColor: "#B1AFB6",
+    marginBottom: 6,
+    position: 'absolute',
+    right: -5,
+  },
+  dashedLine: {
+    width: 26,
+    height: 69,
+    borderStyle: 'dashed',
+    borderRightWidth: 1.6,
+    borderColor: "#B1AFB6",
+    borderBottomWidth: 1.6,
+  },
   tooltip: {
     position: "absolute",
     paddingTop: 15,
     paddingHorizontal: 15,
-    backgroundColor: "#fff",
+    backgroundColor: "transparent",
     borderRadius: 3,
     overflow: "hidden",
   },
-  tooltipText: {},
+  tooltipText: {
+    color: "#fff",
+    lineHeight: 16.8,
+    fontSize: 13,
+    fontWeight: "500"
+  },
   tooltipContainer: {
     flex: 1,
+    backgroundColor: 'transparent',
+  },
+  buttonContainer: {
+    alignSelf: 'flex-start',
+    backgroundColor: "#429D47",
+    paddingHorizontal: 24,
+    paddingVertical: 8,
+    borderRadius: 12,
   },
   stepNumberContainer: {
     position: "absolute",
@@ -53,16 +83,18 @@ export const styles = StyleSheet.create({
     backgroundColor: "transparent",
     color: "#FFFFFF",
   },
-  button: {
-    padding: 10,
-  },
+  button: {},
   buttonText: {
-    color: "#27ae60",
+    color: "#fff",
+    lineHeight: 16.8,
+    fontSize: 13,
+    fontWeight: "500"
   },
   bottomBar: {
     marginTop: 10,
     flexDirection: "row",
-    justifyContent: "flex-end",
+    justifyContent: "flex-start",
+    gap: 10,
   },
   overlayRectangle: {
     position: "absolute",
