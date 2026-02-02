@@ -45,6 +45,7 @@ export type Labels = Partial<
 
 export interface TooltipProps {
   labels: Labels;
+  buttonBarStyles: ViewStyle
 }
 
 export interface MaskProps {

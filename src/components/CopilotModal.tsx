@@ -67,8 +67,8 @@ export const CopilotModal = forwardRef<CopilotModalHandle, Props>(
       },
       svgMaskPath,
       stopOnOutsideClick = false,
-      arrowColor = "#fff",
-      arrowSize = ARROW_SIZE,
+      arrowColor = "transparent",
+      arrowSize = 0,
       margin = MARGIN,
     },
     ref,
@@ -76,6 +76,10 @@ export const CopilotModal = forwardRef<CopilotModalHandle, Props>(
     const { stop, currentStep, visible } = useCopilot();
     const [tooltipStyles, setTooltipStyles] = useState({});
     const [arrowStyles, setArrowStyles] = useState({});
+    const [dotStyles, setDotStyles] = useState({});
+    const [buttonBarStyles, setButtonBarStyles] = useState({});
+    const [dashedLineStyles, setDashedLineStyles] = useState({});
+
     const [animatedValues] = useState({
       top: new Animated.Value(0),
       stepNumberLeft: new Animated.Value(0),
@@ -154,6 +158,9 @@ export const CopilotModal = forwardRef<CopilotModalHandle, Props>(
 
         const tooltip: ViewStyle = {};
         const arrow: ViewStyle = {};
+        const dot: ViewStyle = {};
+        const dashedLine: ViewStyle = {};
+        const buttonBar: ViewStyle = {}
 
         arrow.position = "absolute";
 
@@ -171,6 +178,9 @@ export const CopilotModal = forwardRef<CopilotModalHandle, Props>(
           arrow.borderRightColor = "transparent";
           arrow.borderBottomColor = "transparent";
           arrow.bottom = tooltip.bottom - arrowSize * 2;
+          dot.bottom = -10;
+          dashedLine.borderTopWidth = 1.6;
+          dashedLine.borderBottomWidth = 0;
         }
 
         if (horizontalPosition === "left") {
@@ -182,12 +192,18 @@ export const CopilotModal = forwardRef<CopilotModalHandle, Props>(
             tooltip.right === 0 ? tooltip.right + margin : tooltip.right;
           tooltip.maxWidth = newMeasuredLayout.width - tooltip.right - margin;
           arrow.right = tooltip.right + margin;
+          tooltip.paddingRight = (arrow.right - tooltip.right) + 40;
         } else {
           tooltip.left = Math.max(rect.x, 0);
           tooltip.left =
             tooltip.left === 0 ? tooltip.left + margin : tooltip.left;
           tooltip.maxWidth = newMeasuredLayout.width - tooltip.left - margin;
           arrow.left = tooltip.left + margin;
+          dashedLine.borderLeftWidth = 1.6;
+          dashedLine.borderRightWidth = 0;
+          dot.left = -5;
+          dot.right = 0;
+          tooltip.paddingLeft = (arrow.left - tooltip.left) + 40;
         }
 
         sanitize(arrow);
@@ -218,6 +234,9 @@ export const CopilotModal = forwardRef<CopilotModalHandle, Props>(
 
         setTooltipStyles(tooltip);
         setArrowStyles(arrow);
+        setDotStyles(dot);
+        setDashedLineStyles(dashedLine);
+        setButtonBarStyles(buttonBar);
         setLayout(newMeasuredLayout);
         setMaskRect({
           width: rect.width,
@@ -354,14 +373,15 @@ export const CopilotModal = forwardRef<CopilotModalHandle, Props>(
           >
             <StepNumberComponent />
           </Animated.View>
-          {!!arrowSize && (
-            <Animated.View key="arrow" style={[styles.arrow, arrowStyles]} />
-          )}
+          <Animated.View key="arrow" style={[styles.arrow, arrowStyles]}>
+            <View style={[styles.dot, dotStyles]} />
+            <View style={[styles.dashedLine, dashedLineStyles]} />
+          </Animated.View>
           <Animated.View
             key="tooltip"
             style={[styles.tooltip, tooltipStyles, tooltipStyle]}
           >
-            <TooltipComponent labels={labels} />
+            <TooltipComponent labels={labels} buttonBarStyles={buttonBarStyles}/>
           </Animated.View>
         </>
       );
