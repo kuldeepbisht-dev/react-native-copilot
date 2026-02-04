@@ -208,8 +208,8 @@ export const CopilotModal = forwardRef<CopilotModalHandle, Props>(
 
         sanitize(arrow);
         sanitize(tooltip);
+        sanitize(rect);
         sanitize(dot);
-        sanitize(tooltip);
         sanitize(dashedLine);
 
         const animate = [
