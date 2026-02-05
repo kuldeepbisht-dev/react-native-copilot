@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 
 export const STEP_NUMBER_RADIUS: number = 14;
 export const STEP_NUMBER_DIAMETER: number = STEP_NUMBER_RADIUS * 2;
@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
   dashedLine: {
     width: 26,
     height: 69,
-    borderStyle: 'dashed',
+    borderStyle: Platform.OS === 'ios' ? 'solid' : 'dashed',
     borderRightWidth: 1.6,
     borderColor: "#B1AFB6",
     borderBottomWidth: 1.6,
